@@ -45,6 +45,7 @@ spec:
   ```
   ## let access our application from the browser
   ### let create a service first
+  ### To connect the pod to a service , we need to match the pod label and the service selector( same items in both)
 ```
 apiVersion: v1
 kind: Service
