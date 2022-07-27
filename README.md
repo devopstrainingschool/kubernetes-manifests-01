@@ -45,6 +45,7 @@ spec:
         ports:
         - containerPort: 8080
   ```
+  
   ## let create the object using kubernetes manifest
   ```
   kubectl create -f deployment.yaml
@@ -57,7 +58,21 @@ spec:
   ```
   kubectl describe pod container-name-here
   ```
-  
+  ## let access our application from the browser
+  ### let create a service first
+  ```
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service-app
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+```
   ## make sure you destroy at the end
   ```
   kubectl delete deployment first-deployment
