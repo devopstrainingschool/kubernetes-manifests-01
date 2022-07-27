@@ -11,40 +11,25 @@ vi deployment.yaml
 apiVersion: apps/v1
 
 kind: Deployment
-
 metadata:
-
   name: first-deployment
-
 spec:
-
   selector:
-
     matchLabels:
-
       app: my-app
-
   replicas: 2 # tells deployment to run 2 pods matching the template
-
   template:
-
     metadata:
-
       labels:
-
         app: my-app
-
     spec:
-
       containers:
-
       - name: my-app-01
-
-        image: apiVersion: apps/v1
-
+        image: devopstrainingschool/java-maven-jenkins
         ports:
         - containerPort: 8080
-  ```
+
+```
   
   ## let create the object using kubernetes manifest
   ```
@@ -60,18 +45,21 @@ spec:
   ```
   ## let access our application from the browser
   ### let create a service first
-  ```
+```
 apiVersion: v1
 kind: Service
 metadata:
   name: my-service-app
 spec:
+  type: NodePort
   selector:
     app: my-app
   ports:
-    - protocol: TCP
-      port: 8080
-      targetPort: 8080
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    nodePort: 30007
+
 ```
   ## make sure you destroy at the end
   ```
