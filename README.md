@@ -66,3 +66,45 @@ spec:
   ```
   kubectl delete deployment first-deployment
   ```
+  
+  # Application useing lili as selector and labels
+  ## application deployment manifest file
+  ```
+  apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: bijou-first-app
+   labels:
+     app: lili
+spec:
+   selector:
+     matchLabels:
+       app: lili
+   replicas: 4
+   template:
+     metadata:
+       labels:
+         app: lili
+     spec:
+       containers:
+       - name: my-app-stephanie
+         image: devopstrainingschool/java-maven-jenkins
+         ports:
+         - containerPort: 8080
+ ```
+ ## application service
+ ```
+ apiVersion: v1
+kind: Service
+metadata:
+   name: my-service-constance
+spec:
+   type: NodePort
+   selector:
+      app: lili
+   ports:
+    - protocol: TCP
+      port: 8088
+      targetPort: 8080
+      nodePort: 30007
+```
